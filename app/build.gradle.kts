@@ -46,6 +46,9 @@ android {
         compose = true
     }
 }
+kapt {
+    correctErrorTypes = true
+}
 
 apollo {
     service("service") {

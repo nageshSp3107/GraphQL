@@ -35,10 +35,6 @@ hilt-compose-navigation = { module = "androidx.hilt:hilt-navigation-compose", ve
 navigation-compose = { module = "androidx.navigation:navigation-compose", version = "2.9.0" }
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.6.3" }
 
-#lifecycle
-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version = "2.9.1" }
-lifecycle-livedata = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version = "2.9.1" }
-lifecycle-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version = "2.9.1" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
