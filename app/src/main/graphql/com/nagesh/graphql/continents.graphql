@@ -1,0 +1,6 @@
+query ContinentsFetching {
+  continents{
+    code
+    name
+  }
+}

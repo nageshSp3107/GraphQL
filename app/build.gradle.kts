@@ -50,6 +50,10 @@ android {
 apollo {
     service("service") {
         packageName.set("com.nagesh.graphql")
+        introspection {
+            endpointUrl = "https://countries.trevorblades.com/"
+            schemaFile.set(file("src/main/graphql/com/nagesh/graphql/schema.sdl"))
+        }
     }
 }
 
