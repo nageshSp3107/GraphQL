@@ -44,7 +44,7 @@ fun ContinentsScreen(modifier: Modifier = Modifier, viewModel: ContinentsViewMod
                     modifier = Modifier.fillMaxSize()
                 ) {
                     Text(
-                        text = it.__typename,
+                        text = "it.name",
                         style = MaterialTheme.typography.headlineSmall,
                         modifier = Modifier.padding(12.dp)
                     )

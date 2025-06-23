@@ -1,6 +1,6 @@
 package com.nagesh.graphql.domain.use_cases
 
-import com.nagesh.graphql.FetchContinentsQuery
+import com.nagesh.graphql.ContinentsFetchingQuery
 import com.nagesh.graphql.domain.repository.CountryRepo
 import com.nagesh.graphql.utils.NetworkResult
 import kotlinx.coroutines.Dispatchers
@@ -13,7 +13,7 @@ import javax.inject.Inject
 class FetchContinentsUseCase @Inject constructor(
     private val countryRepo: CountryRepo
 ){
-    operator fun invoke() : Flow<NetworkResult<FetchContinentsQuery.Data>> = flow {
+    operator fun invoke() : Flow<NetworkResult<ContinentsFetchingQuery.Data>> = flow {
         emit(NetworkResult.Loading())
         val response = countryRepo.getContinents()
         if (response.isSuccess){

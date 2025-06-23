@@ -5,11 +5,10 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.apollo)
-
+    alias(libs.plugins.hilt)
     alias(libs.plugins.kotlinx.serialization)
-    alias(libs.plugins.dagger)
     id("kotlin-parcelize")
-    kotlin("kapt")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -46,9 +45,7 @@ android {
         compose = true
     }
 }
-kapt {
-    correctErrorTypes = true
-}
+
 
 apollo {
     service("service") {
@@ -80,12 +77,15 @@ dependencies {
 
     // apollo
     implementation(libs.apollo.runtime)
-    // dagger
-    implementation(libs.dagger.hilt)
+    // Hilt
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
     implementation(libs.hilt.compose.navigation)
-    kapt(libs.dagger.kapt)
 
     // navigation
     implementation(libs.navigation.compose)
     implementation(libs.kotlinx.serialization)
+
+    // Force latest safe version of javapoet
+    implementation("com.squareup:javapoet:1.13.0")
 }

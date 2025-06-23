@@ -2,7 +2,7 @@ package com.nagesh.graphql.presentation.continents
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nagesh.graphql.FetchContinentsQuery
+import com.nagesh.graphql.ContinentsFetchingQuery
 import com.nagesh.graphql.domain.use_cases.FetchContinentsUseCase
 import com.nagesh.graphql.presentation.continents.ContinentsScreen.UiState
 import com.nagesh.graphql.utils.NetworkResult
@@ -61,6 +61,6 @@ object ContinentsScreen{
     data class UiState(
         val isLoading: Boolean = false,
         val error: String = "",
-        val data: FetchContinentsQuery.Data? = null
+        val data: ContinentsFetchingQuery.Data? = null
     )
 }
