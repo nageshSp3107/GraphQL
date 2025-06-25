@@ -25,7 +25,7 @@ object DataModule {
     }
 
 
-    @Singleton
+    @Provides
     fun provideCountryRepo(apolloClient: ApolloClient): CountryRepo {
         return CountryRepoImpl(apolloClient)
     }

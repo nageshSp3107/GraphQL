@@ -3,12 +3,11 @@ import org.gradle.declarative.dsl.schema.FqName.Empty.packageName
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.apollo)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlinx.serialization)
     id("kotlin-parcelize")
-    id("com.google.devtools.ksp")
+    kotlin("kapt")
 }
 
 android {
@@ -43,6 +42,9 @@ android {
     }
     buildFeatures {
         compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.13"
     }
 }
 
@@ -79,13 +81,10 @@ dependencies {
     implementation(libs.apollo.runtime)
     // Hilt
     implementation(libs.hilt.android)
-    ksp(libs.hilt.compiler)
+    kapt(libs.hilt.compiler)
     implementation(libs.hilt.compose.navigation)
 
     // navigation
     implementation(libs.navigation.compose)
     implementation(libs.kotlinx.serialization)
-
-    // Force latest safe version of javapoet
-    implementation("com.squareup:javapoet:1.13.0")
 }
