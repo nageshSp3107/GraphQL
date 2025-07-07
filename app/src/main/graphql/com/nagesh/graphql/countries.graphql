@@ -1,0 +1,8 @@
+query CountriesFetching {
+    countries{
+        code,
+        name,
+        emojiU,
+        native
+    }
+}
