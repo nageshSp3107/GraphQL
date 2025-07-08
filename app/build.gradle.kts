@@ -87,6 +87,7 @@ dependencies {
     // navigation
     implementation(libs.navigation.compose)
     implementation(libs.kotlinx.serialization)
+    implementation(libs.okhttp.logging)
 }
 
 // ✅ Force the correct version of kotlinx.serialization

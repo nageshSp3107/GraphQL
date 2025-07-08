@@ -9,12 +9,14 @@ import com.nagesh.graphql.utils.NetworkResult
 import com.nagesh.graphql.utils.NetworkResult.Loading
 import com.nagesh.graphql.utils.NetworkResult.Success
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,27 +33,28 @@ class ContinentsViewModel @Inject constructor(
 
     fun getContinents() = fetchContinentsUseCase.invoke()
         .onEach { networkResult ->
-            when (networkResult) {
-                is Loading -> {
-                    _uiState.update {
-                        UiState(isLoading = true)
+            withContext (Dispatchers.Main){
+                when (networkResult) {
+                    is Loading -> {
+                        _uiState.update {
+                            UiState(isLoading = true)
+                        }
                     }
-                }
-                is Success -> {
-                    _uiState.update {
-                        UiState(data = networkResult.data)
+                    is Success -> {
+                        _uiState.update {
+                            UiState(data = networkResult.data)
+                        }
                     }
-                }
-                is NetworkResult.Error -> {
-                    _uiState.update {
-                        UiState(
-                            error = networkResult.message ?: "Unknown Error"
-                        )
+                    is NetworkResult.Error -> {
+                        _uiState.update {
+                            UiState(
+                                error = networkResult.message ?: "Unknown Error"
+                            )
+                        }
                     }
-                }
 
+                }
             }
-
         }
         .launchIn(viewModelScope)
 
