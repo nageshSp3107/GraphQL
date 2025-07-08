@@ -7,10 +7,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
-import com.nagesh.graphql.presentation.continents.ContinentsViewModel
-import com.nagesh.graphql.presentation.screens.ContinentsScreen
+import com.nagesh.graphql.presentation.navigation.MainNavigation
 import com.nagesh.graphql.ui.theme.GrapghqlAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,9 +20,11 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             GrapghqlAppTheme {
-                val continentsViewModel = hiltViewModel<ContinentsViewModel>()
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    ContinentsScreen(modifier = Modifier.padding(innerPadding), viewModel = continentsViewModel)
+                    Surface(modifier = Modifier.padding(innerPadding)) {
+                        MainNavigation()
+                    }
+
                 }
             }
         }

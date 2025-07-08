@@ -1,6 +1,7 @@
-package com.nagesh.graphql.presentation.screens
+package com.nagesh.graphql.presentation.continents
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,10 +21,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.nagesh.graphql.presentation.continents.ContinentsViewModel
 
 @Composable
-fun ContinentsScreen(modifier: Modifier = Modifier, viewModel: ContinentsViewModel) {
+fun ContinentsScreen(modifier: Modifier = Modifier,
+                     viewModel: ContinentsViewModel,
+                     onClick: (String) -> Unit) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     if (uiState.isLoading){
         Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -68,6 +70,9 @@ fun ContinentsScreen(modifier: Modifier = Modifier, viewModel: ContinentsViewMod
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(10.dp)
+                            .clickable{
+                                onClick(it.code)
+                            }
                     ) {
                         Column(
                             modifier = Modifier.padding(12.dp),

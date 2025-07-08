@@ -5,7 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.apollo)
     alias(libs.plugins.hilt)
-    alias(libs.plugins.kotlinx.serialization)
+    kotlin("plugin.serialization") version libs.versions.kotlin.get()
     id("kotlin-parcelize")
     kotlin("kapt")
 }
@@ -87,4 +87,12 @@ dependencies {
     // navigation
     implementation(libs.navigation.compose)
     implementation(libs.kotlinx.serialization)
+}
+
+// ✅ Force the correct version of kotlinx.serialization
+configurations.all {
+    resolutionStrategy {
+        force("org.jetbrains.kotlinx:kotlinx-serialization-core:1.6.3")
+        force("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+    }
 }
