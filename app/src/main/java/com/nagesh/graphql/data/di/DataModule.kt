@@ -15,15 +15,20 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 @Module
 object DataModule {
-    val loggingInterceptor = HttpLoggingInterceptor().apply {
-        level = HttpLoggingInterceptor.Level.BODY // Or HEADERS/BASIC/NONE
+
+    @Singleton
+    @Provides
+    fun provideOkHttpClient(): OkHttpClient {
+        val loggingInterceptor = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY // Or HEADERS/BASIC/NONE
+        }
+        return OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .build()
     }
     @Singleton
     @Provides
-    fun provideApolloClient(): ApolloClient {
-        val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor (loggingInterceptor)
-            .build()
+    fun provideApolloClient(okHttpClient: OkHttpClient): ApolloClient {
         return ApolloClient.Builder()
             .serverUrl("https://countries.trevorblades.com/")
             .okHttpClient(okHttpClient)

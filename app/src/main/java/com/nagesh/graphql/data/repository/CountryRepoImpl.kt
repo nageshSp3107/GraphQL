@@ -10,9 +10,9 @@ class CountryRepoImpl(private val apolloClient: ApolloClient) : CountryRepo {
         return try {
             val response = apolloClient.query(ContinentsFetchingQuery()).execute()
             response.data?.let {
-                return Result.success(it)
+                 Result.success(it)
             } ?: run {
-                return Result.failure(response.exception!!)
+                 Result.failure(response.exception!!)
             }
         }catch (e: Exception){
             Result.failure(e)
